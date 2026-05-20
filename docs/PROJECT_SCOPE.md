@@ -3,8 +3,9 @@
 ## What Alex Clone Is
 
 Alex Clone is a personal operating agent for Alex. It watches approved LINE
-groups, remembers progress, summarizes social and project signals, keeps Alex's
-private vault current, checks calendar context, and helps Alex reply.
+groups, remembers progress, summarizes social and project signals, keeps the
+`alex-mind` Obsidian vault current, checks calendar context, and helps Alex
+reply.
 
 ## Primary Jobs
 
@@ -14,7 +15,7 @@ private vault current, checks calendar context, and helps Alex reply.
    - Detect tasks, promises, deadlines, invitations, and relationship signals.
    - Report group-by-group progress daily.
 
-2. **Alex Personal Vault**
+2. **alex-mind Obsidian Vault**
    - Write daily group summaries.
    - Maintain people/project notes.
    - Save open loops and follow-up tasks.
@@ -42,4 +43,3 @@ private vault current, checks calendar context, and helps Alex reply.
 - Pretending to be Alex in contexts where disclosure is required.
 - Fully autonomous calendar creation.
 - Deleting messages or modifying cloud permissions.
-

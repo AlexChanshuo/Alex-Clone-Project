@@ -1,5 +1,11 @@
 # Vault Schema
 
+Canonical vault name: `alex-mind`.
+
+This is the LLM wiki vault that Alex Clone should ingest from and write to.
+Do not store Alex Clone notes in the BNI Masta vault unless Alex explicitly
+requests a one-off export.
+
 ## Daily Note Template
 
 ```markdown
@@ -56,4 +62,3 @@
 
 ## Last Interaction
 ```
-

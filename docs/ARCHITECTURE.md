@@ -16,7 +16,7 @@ flowchart TD
   F --> J["Reply policy gate"]
   J --> K["Draft to Alex"]
   J --> L["Send via LINE executor"]
-  I --> M["Alex personal vault"]
+  I --> M["alex-mind Obsidian vault"]
 ```
 
 ## Components
@@ -25,7 +25,7 @@ flowchart TD
 |---|---|
 | Ingestion | Capture messages/events from approved LINE groups |
 | Event classifier | Convert raw chat into mentions, tasks, decisions, social signals |
-| Memory writer | Append structured notes to Alex's personal vault |
+| Memory writer | Append structured notes to the `alex-mind` Obsidian vault |
 | Calendar context | Read free/busy and upcoming events |
 | Reply drafter | Produce Alex-style replies with rationale |
 | Policy gate | Decide draft-only, ask-confirmation, or auto-send |
@@ -34,10 +34,11 @@ flowchart TD
 
 ## Storage Model
 
-Vault-first, append-only in V1:
+Vault-first, append-only in V1. The canonical LLM wiki vault is named
+`alex-mind`; do not write clone memory into the BNI vault.
 
 ```text
-Alex Personal Vault/
+alex-mind/
   daily/
     YYYY-MM-DD.md
   line-groups/
@@ -51,4 +52,3 @@ Alex Personal Vault/
 ```
 
 Structured database can be added later after the note schema stabilizes.
-

@@ -2,8 +2,8 @@
 
 Alex Clone Project is the operating system for Alex's authorized digital double.
 The clone is meant to sit in selected LINE groups, collect useful context, report
-back to Alex, maintain Alex's personal vault, understand calendar constraints,
-and help draft or send replies only under Alex's rules.
+back to Alex, maintain the `alex-mind` Obsidian vault, understand calendar
+constraints, and help draft or send replies only under Alex's rules.
 
 This project is separate from BNI Masta. It may reuse patterns from BNI Masta
 later, but it owns its own repo, docs, config, vault namespace, and release path.
@@ -15,7 +15,7 @@ Build a trusted Alex 分身 that can:
 - join LINE groups where the real Alex intentionally adds it,
 - observe group progress and summarize what matters,
 - produce daily reports per group,
-- update Alex's personal vault with relationship and project memory,
+- update the `alex-mind` Obsidian vault with relationship and project memory,
 - read Alex's schedule from Google Calendar when authorized,
 - prepare reply drafts in Alex's voice,
 - send LINE replies only when explicitly commanded or allowlisted,
@@ -42,7 +42,7 @@ acts for Alex in approved spaces, with clear target allowlists and logs.
 |---|---|---|
 | LINE group monitoring | design | groups must be added/approved by Alex |
 | Daily group report | design | one report per group plus master summary |
-| Vault updates | design | append-only notes first, structured memory later |
+| `alex-mind` vault updates | design | append-only notes first, structured memory later |
 | Google Calendar awareness | design | needs connector/auth before live use |
 | Reply drafting | design | Alex voice guide required |
 | Reply sending | design | confirmation-gated except allowlisted commands |
@@ -54,7 +54,7 @@ acts for Alex in approved spaces, with clear target allowlists and logs.
 docs/              Architecture, product scope, operating policies
 src/               Future runtime code
 config/            Non-secret config templates
-vault-templates/   Markdown templates for Alex's personal vault
+vault-templates/   Markdown templates for the alex-mind Obsidian vault
 ```
 
 ## Safety Rules
@@ -73,4 +73,3 @@ vault-templates/   Markdown templates for Alex's personal vault
 4. Add calendar reader with Google Calendar connector.
 5. Add LINE executor path for approved groups.
 6. Add daily scheduled reports.
-
