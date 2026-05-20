@@ -40,6 +40,7 @@ acts for Alex in approved spaces, with clear target allowlists and logs.
 
 | Capability | Status | Notes |
 |---|---|---|
+| Telegram LLM brain | live | Hermes is installed, paired to Alex's Telegram, running through `launchd`, and using Copilot `gpt-5-mini` locally |
 | LINE group monitoring | scaffold | personal LINE Computer Use is the V1 route |
 | Daily group report | scaffold | JSONL event captures can generate Markdown reports |
 | `alex-mind` vault updates | scaffold | raw captures, reports, digests, and send audits |
@@ -108,12 +109,13 @@ memory there, following the vault's existing append-first rules.
 
 ## Next Build Milestones
 
-1. Create real local `config/groups.json` with approved personal LINE groups.
-2. Connect Computer Use to produce LINE capture JSON from `PersonalLineFetchPlan`.
-3. Add calendar reader with Google Calendar connector.
-4. Improve Alex voice drafting with examples from `alex-mind`.
-5. Add daily scheduled reports.
-6. Add eval fixtures from real approved group captures.
+1. Confirm the live Hermes Telegram bot responds consistently from Alex's phone.
+2. Verify the `launchd` gateway survives restart/sleep and logs cleanly.
+3. Connect Computer Use to produce LINE capture JSON from `PersonalLineFetchPlan`.
+4. Add scheduled morning, midday, and night reports after LINE capture is stable.
+5. Add calendar reader with Google Calendar connector.
+6. Improve Alex voice drafting with examples from `alex-mind`.
+7. Add eval fixtures from real approved group captures.
 
 ## Run V1 Locally
 

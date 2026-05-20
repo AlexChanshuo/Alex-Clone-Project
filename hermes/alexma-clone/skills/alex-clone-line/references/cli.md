@@ -12,7 +12,7 @@ cd "/Users/alex/Documents/New project/Alex-Clone-Project"
 PYTHONPATH=src python3 -m alex_clone.cli guide
 ```
 
-## Interpret/Plan
+## Interpret / Plan
 
 ```bash
 PYTHONPATH=src python3 -m alex_clone.cli interpret-command "分身，去看 AI 群今天有什麼重要的"
@@ -41,3 +41,18 @@ PYTHONPATH=src python3 -m alex_clone.cli normalize-capture tests/fixtures/line_c
 PYTHONPATH=src python3 -m alex_clone.cli ingest-capture tests/fixtures/line_capture_ai.json --group "AI實戰先鋒會" --new-only --update-checkpoint --report
 ```
 
+## Reply Draft / Send Plan
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli draft-reply --group "AI實戰先鋒會" --text "我晚點整理資料"
+PYTHONPATH=src python3 -m alex_clone.cli personal-line-send-plan --group "AI實戰先鋒會" --text "我晚點整理資料"
+```
+
+## Hermes Smoke Test
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+export HERMES_HOME="/Users/alex/Documents/New project/Alex-Clone-Project/hermes/alexma-clone"
+hermes status
+hermes -z "用繁體中文回答，只回答：Alex Clone Hermes 可以思考了。"
+```

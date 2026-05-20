@@ -1,7 +1,10 @@
 ---
 name: alex-clone-line
-description: Operate Alex Clone's LINE group intelligence backend: parse Telegram commands, plan personal LINE fetches, normalize capture JSON, ingest captures into alex-mind, check checkpoints, list groups, and guide Alex in Chinese.
-version: 1.0.0
+description: >
+  Operate Alex Clone's LINE group intelligence backend: parse Telegram commands,
+  plan personal LINE fetches, normalize capture JSON, ingest captures into
+  alex-mind, check checkpoints, list groups, and guide Alex in Traditional Chinese.
+version: 1.2.0
 metadata:
   hermes:
     tags: [alex-clone, line, telegram, obsidian, alex-mind]
@@ -11,7 +14,7 @@ metadata:
 # Alex Clone LINE
 
 Use this skill whenever Alex asks to inspect, summarize, follow up on, or draft
-replies for his approved LINE groups.
+replies for approved LINE groups.
 
 Examples:
 
@@ -37,7 +40,7 @@ validate, write, checkpoint, and report.
 /Users/alex/Documents/New project/Alex-Clone-Project
 ```
 
-## Procedure
+## Canonical Procedure
 
 1. Parse Alex's message naturally. He should not need exact commands.
 2. Run `command-plan` to get target groups, tags, fetch plans, and next step:
@@ -46,7 +49,7 @@ validate, write, checkpoint, and report.
 PYTHONPATH=src python3 -m alex_clone.cli command-plan "<Alex message>"
 ```
 
-3. Explain the interpreted action in Traditional Chinese.
+3. Explain the interpreted action in concise Traditional Chinese.
 4. If the plan requires live LINE reading, tell Alex which group/tag will be
    checked and that the Computer Use reader must execute the fetch plan.
 5. If a capture JSON file is available, ingest it:
@@ -77,6 +80,28 @@ PYTHONPATH=src python3 -m alex_clone.cli checkpoints
 PYTHONPATH=src python3 -m alex_clone.cli normalize-capture tests/fixtures/line_capture_ai.json --group "AI實戰先鋒會"
 ```
 
+## Live-Capture Safety Checklist
+
+- Before opening or operating Alex's LINE UI, show the target group title and
+  ask Alex for confirmation if there is any ambiguity.
+- Verify the active LINE group title before reading or sending.
+- Do not send LINE messages from Hermes directly until the Computer Use executor
+  is implemented and title-checked.
+- Stop and report if a permission, payment, login, 2FA, or system dialog appears.
+- Respect `capture_limit` and `max_scrolls`; do not endlessly scroll.
+
+## Ingest Success Proof
+
+Do not claim LINE ingest is complete unless the CLI result shows:
+
+- normalized events were accepted,
+- `paths` includes written vault/report files,
+- `updated_checkpoints` includes the affected group when checkpointing was requested,
+- the group title matched the approved group or alias.
+
+If `--new-only` returns zero new events, explain that the checkpoint may already
+cover those messages and run `checkpoints` before retrying.
+
 ## Reply/Sending Safety
 
 If Alex asks you to reply:
@@ -84,8 +109,7 @@ If Alex asks you to reply:
 1. Draft the reply first.
 2. Mention target group.
 3. Ask for confirmation unless policy explicitly allows auto-send.
-4. Do not click/send LINE from Hermes directly until the Computer Use executor is
-   implemented and title-checked.
+4. Use `personal-line-send-plan` only after Alex confirms.
 
 ## Response Style
 
@@ -97,4 +121,3 @@ Reply in concise Traditional Chinese with practical status:
 下一步：打開 Alex 本人的 LINE，確認群組標題，讀取 checkpoint 之後的新訊息。
 目前我會先產生 fetch plan；真正讀 LINE UI 的 Computer Use reader 是下一步。
 ```
-

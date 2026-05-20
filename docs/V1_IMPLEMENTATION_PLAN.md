@@ -21,7 +21,7 @@ Expected result:
 
 ## Phase 0: Project Setup
 
-Status: scaffolded.
+Status: scaffolded and connected to a live Hermes Telegram brain.
 
 Tasks:
 
@@ -30,6 +30,8 @@ Tasks:
 - Keep `.env` local and untracked.
 - Create group and policy config files from examples.
 - Add source links and research decisions to docs.
+- Keep Hermes runtime files ignored; only stable identity, skill, and config
+  templates belong in Git.
 
 ## Phase 1: LINE Read Pipeline
 
@@ -181,6 +183,9 @@ active group title before any send, paste the prepared message, take a
 pre-send or post-send screenshot when practical, and write an audit record.
 
 ## Phase 6: Automation
+
+Status: planned. Hermes gateway is live through `launchd`, but scheduled LINE
+reports should wait until the LINE reader is stable.
 
 Create recurring jobs only after Phase 1-5 work manually:
 

@@ -60,6 +60,20 @@ hermes/alexma-clone/
 scripts/setup_hermes_alexma_clone.sh
 ```
 
+## Current Live Status
+
+As of 2026-05-21:
+
+- Hermes is installed locally at `~/.local/bin/hermes`.
+- `HERMES_HOME` is `/Users/alex/Documents/New project/Alex-Clone-Project/hermes/alexma-clone`.
+- `config.yaml` is present locally and uses Copilot `gpt-5-mini` as the model.
+- Telegram pairing has been approved for Alex's Telegram account.
+- The gateway has been tested and `hermes status` reports it running through
+  `launchd`.
+- The LINE Computer Use reader is still the next build phase; Hermes can plan
+  and guide the operation, but it does not yet complete daily LINE reports
+  end-to-end by itself.
+
 ## Setup
 
 Hermes is not committed into this repo. Install it from the official installer:
@@ -112,6 +126,16 @@ hermes gateway start
 hermes gateway status
 ```
 
+If the service needs to be reinstalled or restarted:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+export HERMES_HOME="/Users/alex/Documents/New project/Alex-Clone-Project/hermes/alexma-clone"
+hermes gateway install
+hermes gateway start
+hermes gateway status
+```
+
 ## Test the Backend Skill Contract
 
 Before live Telegram:
@@ -139,3 +163,23 @@ Hermes integration gives the LLM-backed Telegram brain. It does not yet solve:
 
 Those remain separate backend phases.
 
+## Next Phase
+
+Build the Computer Use LINE fetcher:
+
+1. Open Alex's personal LINE on this Mac.
+2. Select only an approved group from `config/groups.json`.
+3. Verify the visible group title before reading.
+4. Capture visible messages and scroll up until the checkpoint.
+5. Emit capture JSON for the existing `ingest-capture` CLI.
+6. Write raw events and daily reports to `alex-mind`.
+7. Return a concise Telegram summary through Hermes.
+
+Before scheduling daily reports, verify the gateway remains healthy after Mac
+sleep/restart:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+export HERMES_HOME="/Users/alex/Documents/New project/Alex-Clone-Project/hermes/alexma-clone"
+hermes gateway status
+```

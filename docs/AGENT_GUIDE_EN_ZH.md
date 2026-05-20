@@ -23,6 +23,11 @@ The code is dependency-free Python under `src/alex_clone`.
 Hermes is the recommended LLM-backed Telegram brain. It should call the Python
 CLI through the `alex-clone-line` skill instead of reimplementing execution.
 
+Live status: Hermes is installed locally, configured with Copilot `gpt-5-mini`,
+paired to Alex's Telegram account, and reported by `hermes status` as running
+through `launchd`. Gateway stability checks and the LINE Computer Use reader are
+still next.
+
 Main modules:
 
 - `commands.py`: parses Telegram-style natural language.
@@ -134,6 +139,11 @@ still next.
 程式碼是無外部依賴的 Python，位置在 `src/alex_clone`。
 Hermes 是建議使用的 Telegram LLM 大腦。它應該透過
 `alex-clone-line` skill 呼叫 Python CLI，不要重新實作執行層。
+
+目前狀態：Hermes 已在本機安裝，使用 Copilot `gpt-5-mini`，也已經和
+Alex 的 Telegram 帳號完成 pairing。`hermes status` 顯示 gateway 已透過
+`launchd` 執行；下一步是確認常駐穩定性，並建立真正讀取 LINE 畫面的
+Computer Use reader。
 
 主要模組：
 

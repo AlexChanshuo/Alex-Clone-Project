@@ -1,6 +1,3 @@
-# Example Hermes config for Alexma Clone.
-# Copy/adapt into $HERMES_HOME/config.yaml after Hermes is installed.
-
 agent:
   name: Alexma Clone
 
@@ -17,8 +14,6 @@ platforms:
   telegram:
     enabled: true
 
-# Keep tool access conservative. The Alex Clone backend should perform
-# deterministic writes/checkpoints through its CLI.
 tools:
   terminal:
     enabled: true

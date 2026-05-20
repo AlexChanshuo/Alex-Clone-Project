@@ -8,6 +8,10 @@ The recommended live Telegram runtime is Hermes Agent. Hermes provides the
 LLM-backed conversation layer; Alex Clone's Python CLI remains the deterministic
 execution layer.
 
+Current status: Hermes is installed and paired for Alex's Telegram account. The
+gateway has been tested and `hermes status` reports it running through
+`launchd`.
+
 Bot URL:
 
 <https://t.me/AlexmaClone_bot>
@@ -94,3 +98,18 @@ The parser intentionally accepts wide Chinese and English wording.
 PYTHONPATH=src python3 -m alex_clone.cli interpret-command "分身，去看 AI 群今天有什麼重要的"
 PYTHONPATH=src python3 -m alex_clone.cli guide
 ```
+
+## Hermes Live Test
+
+After the gateway is running, message the bot naturally:
+
+```text
+分身，去看 AI 群今天有什麼重要的
+```
+
+Expected current behavior:
+
+- Hermes understands the intent.
+- It identifies the approved `AI` group target.
+- It explains that the LINE Computer Use reader is the next executor.
+- It should not claim that it already read LINE until the capture reader exists.
