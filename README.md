@@ -83,6 +83,8 @@ memory there, following the vault's existing append-first rules.
 
 ## Planning Docs
 
+- [Layman guide English/Chinese](docs/LAYMAN_GUIDE_EN_ZH.md)
+- [Agent guide English/Chinese](docs/AGENT_GUIDE_EN_ZH.md)
 - [Three-cycle plan](docs/PLANNING_CYCLES.md)
 - [V1 implementation plan](docs/V1_IMPLEMENTATION_PLAN.md)
 - [Runtime CLI](docs/RUNTIME_CLI.md)
