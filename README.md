@@ -86,6 +86,7 @@ memory there, following the vault's existing append-first rules.
 - [Three-cycle plan](docs/PLANNING_CYCLES.md)
 - [V1 implementation plan](docs/V1_IMPLEMENTATION_PLAN.md)
 - [Runtime CLI](docs/RUNTIME_CLI.md)
+- [Telegram commands](docs/TELEGRAM_COMMANDS.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [LINE workflows](docs/LINE_WORKFLOWS.md)
 - [Calendar workflows](docs/CALENDAR_WORKFLOWS.md)

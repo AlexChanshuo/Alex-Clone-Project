@@ -39,6 +39,8 @@ class AppConfig:
     vault_dir: Path
     groups: list[GroupConfig]
     policy: PolicyConfig
+    telegram_bot_configured: bool
+    telegram_bot_username: str = "AlexmaClone_bot"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -94,6 +96,7 @@ def load_policy(path: Path) -> PolicyConfig:
 
 def load_config(repo_root: Path | None = None) -> AppConfig:
     root = repo_root or Path.cwd()
+    env_values = load_env_file(root / ".env")
     vault_dir = Path(os.environ.get("ALEX_MIND_VAULT_DIR", DEFAULT_VAULT_DIR)).expanduser()
     default_groups_path = root / "config/groups.json"
     if not default_groups_path.exists():
@@ -105,6 +108,12 @@ def load_config(repo_root: Path | None = None) -> AppConfig:
         vault_dir=vault_dir,
         groups=load_groups(groups_path),
         policy=load_policy(policy_path),
+        telegram_bot_configured=bool(
+            os.environ.get("ALEX_CLONE_TELEGRAM_BOT_TOKEN")
+            or os.environ.get("TELEGRAM_BOT_TOKEN")
+            or env_values.get("ALEX_CLONE_TELEGRAM_BOT_TOKEN")
+            or env_values.get("TELEGRAM_BOT_TOKEN")
+        ),
     )
 
 
@@ -121,3 +130,16 @@ def normalize_tags(tags: list[str]) -> list[str]:
         if cleaned and cleaned not in normalized:
             normalized.append(cleaned)
     return normalized
+
+
+def load_env_file(path: Path) -> dict[str, str]:
+    values: dict[str, str] = {}
+    if not path.exists():
+        return values
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        values[key.strip()] = value.strip().strip("'\"")
+    return values

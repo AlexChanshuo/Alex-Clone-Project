@@ -22,6 +22,24 @@ PYTHONPATH=src python3 -m alex_clone.cli groups --tag BNI
 PYTHONPATH=src python3 -m alex_clone.cli groups --tag AI
 ```
 
+### `interpret-command`
+
+Parses Telegram-style natural language into an intent, tags, group matches, and
+reply text.
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli interpret-command "分身，去看 AI 群今天有什麼重要的"
+PYTHONPATH=src python3 -m alex_clone.cli interpret-command "整理 BNI 今天重點並更新 alex-mind"
+```
+
+### `guide`
+
+Shows command examples for Alex.
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli guide
+```
+
 ### `status`
 
 Shows loaded repo path, `alex-mind` path, group config, and policy config.

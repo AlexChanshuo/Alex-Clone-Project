@@ -9,6 +9,7 @@ from datetime import date
 from pathlib import Path
 
 from .config import GroupConfig, load_config
+from .commands import command_guidance, parse_command
 from .io import read_events_jsonl
 from .line_personal import PersonalLineSendPlan
 from .models import SendAudit
@@ -35,6 +36,13 @@ def build_parser() -> argparse.ArgumentParser:
     groups = subparsers.add_parser("groups", help="List approved/follow-up LINE groups.")
     groups.add_argument("--tag", help="Filter by tag, e.g. BNI, AI, family, Friends.")
     groups.set_defaults(func=cmd_groups)
+
+    interpret = subparsers.add_parser("interpret-command", help="Parse Telegram-style natural language.")
+    interpret.add_argument("text")
+    interpret.set_defaults(func=cmd_interpret_command)
+
+    guide = subparsers.add_parser("guide", help="Show natural-language command examples.")
+    guide.set_defaults(func=cmd_guide)
 
     ingest = subparsers.add_parser("ingest-manual", help="Append JSONL LINE events to alex-mind raw inbox.")
     ingest.add_argument("events_jsonl", type=Path)
@@ -69,6 +77,8 @@ def cmd_status(args: argparse.Namespace, config) -> int:
         "repo_root": str(config.repo_root),
         "vault_dir": str(config.vault_dir),
         "vault_exists": config.vault_dir.exists(),
+        "telegram_bot_username": config.telegram_bot_username,
+        "telegram_bot_configured": config.telegram_bot_configured,
         "groups": [group.__dict__ for group in config.groups],
         "policy": {
             "require_confirmation_for": sorted(config.policy.require_confirmation_for),
@@ -98,6 +108,17 @@ def cmd_groups(args: argparse.Namespace, config) -> int:
         for group in groups
     ]
     print(json.dumps(payload, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_interpret_command(args: argparse.Namespace, config) -> int:
+    parsed = parse_command(args.text, config.groups)
+    print(json.dumps(parsed.__dict__, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_guide(args: argparse.Namespace, config) -> int:
+    print(command_guidance())
     return 0
 
 
