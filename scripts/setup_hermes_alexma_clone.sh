@@ -37,6 +37,6 @@ echo
 echo "Next commands:"
 echo "  export HERMES_HOME=\"$HERMES_HOME_DIR\""
 echo "  hermes skills list"
+echo "  hermes curator pin alex-clone-line"
 echo "  hermes gateway setup"
 echo "  hermes gateway"
-

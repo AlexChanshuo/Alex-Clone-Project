@@ -117,6 +117,17 @@ If `--new-only` returns zero new events, do this before retrying:
 If the CLI returns `report_markdown` but no `paths` or checkpoint updates, treat
 it as a partial operation and ask before claiming completion.
 
+## Telegram Report Output
+
+- Send Alex a concise Traditional Chinese summary in the Telegram message body.
+- Do not attach local Markdown, JSON, JSONL, screenshots, or placeholder paths
+  unless Alex explicitly asks for the file.
+- If a report was saved, mention only the saved vault path and the proof fields:
+  `events_ingested`, `paths`, `updated_checkpoints`, `report_path`.
+- Never describe a report as complete when it only contains placeholders such as
+  "None detected" for messages that contain requests like `請`, `測試`, `回覆`,
+  `幫`, or `確認`.
+
 ## Reply/Sending Safety
 
 If Alex asks you to reply:

@@ -12,11 +12,19 @@ class ReportTests(unittest.TestCase):
         report = generate_daily_report(events, date(2026, 5, 20))
 
         self.assertIn("AI實戰先鋒會 AI Agent group", report)
-        self.assertIn("Questions for Alex", report)
+        self.assertIn("可能需要 Alex 回覆", report)
         self.assertIn("Kevin", report)
-        self.assertIn("Tasks/open loops", report)
+        self.assertIn("待辦 / open loops", report)
+
+    def test_generate_daily_report_detects_test_requests_and_acknowledgements(self):
+        events = read_events_jsonl(Path("tests/fixtures/line_events_report_requests.jsonl"))
+        report = generate_daily_report(events, date(2026, 5, 21))
+
+        self.assertIn("新版模型部署完成", report)
+        self.assertIn("請測試一下", report)
+        self.assertIn("稍晚測試並回覆", report)
+        self.assertNotIn("None detected", report)
 
 
 if __name__ == "__main__":
     unittest.main()
-

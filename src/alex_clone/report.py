@@ -8,8 +8,42 @@ from datetime import date
 from .models import LineEvent
 
 
-QUESTION_MARKERS = ("?", "？", "嗎", "么", "請問")
-TASK_MARKERS = ("幫", "需要", "記得", "todo", "待辦", "安排", "確認")
+QUESTION_MARKERS = ("?", "？", "嗎", "么", "請問", "可不可以", "能不能", "是否", "有沒有")
+REQUEST_MARKERS = (
+    "請",
+    "麻煩",
+    "幫",
+    "需要",
+    "記得",
+    "確認",
+    "測試",
+    "看一下",
+    "回覆",
+    "處理",
+    "安排",
+    "提醒",
+    "todo",
+    "待辦",
+)
+IMPORTANT_MARKERS = (
+    "決定",
+    "重要",
+    "提醒",
+    "deadline",
+    "會議",
+    "活動",
+    "報名",
+    "付款",
+    "部署",
+    "上線",
+    "更新",
+    "完成",
+    "問題",
+    "失敗",
+    "錯誤",
+    "urgent",
+)
+ACK_MARKERS = ("收到", "了解", "ok", "okay", "晚點", "稍晚", "我會", "我來")
 
 
 def generate_daily_report(events: list[LineEvent], report_date: date) -> str:
@@ -24,53 +58,59 @@ def generate_daily_report(events: list[LineEvent], report_date: date) -> str:
         "source: alex-clone",
         "---",
         "",
-        f"# Alex Clone Daily Report - {report_date}",
+        f"# Alex Clone 每日 LINE 摘要 - {report_date}",
         "",
-        "## Summary",
-        f"- Groups reviewed: {len(grouped)}",
-        f"- Messages captured: {len(events)}",
+        "## 總覽",
+        f"- 已檢查群組：{len(grouped)}",
+        f"- 擷取訊息：{len(events)}",
         "",
     ]
 
     if not events:
-        lines.extend(["## Group Reports", "- No captured LINE events for this date.", ""])
+        lines.extend(["## 群組摘要", "- 今天沒有擷取到 LINE 訊息。", ""])
         return "\n".join(lines)
 
-    lines.append("## Group Reports")
+    lines.append("## 群組摘要")
     for group_name, group_events in sorted(grouped.items()):
         lines.extend(["", f"### {group_name}", ""])
-        lines.append(f"- Messages: {len(group_events)}")
+        lines.append(f"- 訊息數：{len(group_events)}")
         important = select_important_messages(group_events)
         questions = [event for event in group_events if has_marker(event.text, QUESTION_MARKERS)]
-        tasks = [event for event in group_events if has_marker(event.text, TASK_MARKERS)]
+        tasks = [event for event in group_events if has_marker(event.text, REQUEST_MARKERS)]
+        acknowledgements = [event for event in group_events if has_marker(event.text, ACK_MARKERS)]
 
-        lines.append("- Important updates:")
+        lines.append("- 要注意的重點：")
         for event in important:
             lines.append(f"  - {event.sender_name}: {compact(event.text)}")
         if not important:
-            lines.append("  - None detected.")
+            lines.append("  - 沒有明顯重點。")
 
-        lines.append("- Questions for Alex:")
+        lines.append("- 可能需要 Alex 回覆：")
         for event in questions[:5]:
             lines.append(f"  - {event.sender_name}: {compact(event.text)}")
         if not questions:
-            lines.append("  - None detected.")
+            lines.append("  - 沒有明顯問題。")
 
-        lines.append("- Tasks/open loops:")
+        lines.append("- 待辦 / open loops：")
         for event in tasks[:5]:
             lines.append(f"  - {event.sender_name}: {compact(event.text)}")
         if not tasks:
-            lines.append("  - None detected.")
+            lines.append("  - 沒有明顯待辦。")
+
+        if acknowledgements:
+            lines.append("- 已有人承接 / 回應：")
+            for event in acknowledgements[:5]:
+                lines.append(f"  - {event.sender_name}: {compact(event.text)}")
 
     lines.extend(
         [
             "",
-            "## Suggested Reply Queue",
-            "- Draft replies should be generated separately through the policy gate.",
+            "## 建議回覆佇列",
+            "- 需要送出的回覆應另外用 policy gate 產生草稿，不在報告裡直接送出。",
             "",
-            "## Vault Updates",
-            "- Raw LINE events appended under `raw/inbox/line/`.",
-            "- This report can be saved under `wiki/outputs/alex-clone-daily/`.",
+            "## Vault 更新",
+            "- Raw LINE events 已追加到 `raw/inbox/line/`。",
+            "- 此報告可儲存到 `wiki/outputs/alex-clone-daily/`。",
         ]
     )
     return "\n".join(lines)
@@ -84,12 +124,14 @@ def select_important_messages(events: list[LineEvent]) -> list[LineEvent]:
 def score_event(event: LineEvent) -> int:
     text = event.text.lower()
     score = 0
-    for marker in ("決定", "重要", "提醒", "deadline", "會議", "活動", "報名", "付款"):
+    for marker in IMPORTANT_MARKERS:
         if marker in text:
             score += 2
     if has_marker(event.text, QUESTION_MARKERS):
         score += 1
-    if has_marker(event.text, TASK_MARKERS):
+    if has_marker(event.text, REQUEST_MARKERS):
+        score += 1
+    if has_marker(event.text, ACK_MARKERS):
         score += 1
     if len(event.text) > 80:
         score += 1
@@ -106,4 +148,3 @@ def compact(text: str, max_len: int = 180) -> str:
     if len(one_line) <= max_len:
         return one_line
     return one_line[: max_len - 3] + "..."
-

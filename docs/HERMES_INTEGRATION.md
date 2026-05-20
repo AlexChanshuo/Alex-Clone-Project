@@ -153,6 +153,20 @@ Expected behavior:
 - The CLI returns target groups and fetch plans.
 - Hermes explains the next step in friendly Chinese.
 
+## Protect Project Skills
+
+Pin the custom project skill so Hermes background review/curator logic does not
+rewrite the committed skill files during normal Telegram operation:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+export HERMES_HOME="/Users/alex/Documents/New project/Alex-Clone-Project/hermes/alexma-clone"
+hermes curator pin alex-clone-line
+```
+
+Runtime notes should go to ignored Hermes session files or `alex-mind`, not into
+`hermes/alexma-clone/skills/alex-clone-line/`.
+
 ## Still Not Done
 
 Hermes integration gives the LLM-backed Telegram brain. It does not yet solve:

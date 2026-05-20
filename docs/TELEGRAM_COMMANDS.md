@@ -113,3 +113,15 @@ Expected current behavior:
 - It identifies the approved `AI` group target.
 - It explains that the LINE Computer Use reader is the next executor.
 - It should not claim that it already read LINE until the capture reader exists.
+
+## Report Quality Rule
+
+When Alex asks for a report, the bot should answer in Telegram with a concise
+Traditional Chinese summary. It should not attach raw Markdown/JSON files unless
+Alex explicitly asks for files. A valid report should mention proof fields from
+the CLI result, especially `events_ingested`, `paths`, `updated_checkpoints`,
+and `report_path` when saved.
+
+The report generator should treat words like `請`, `測試`, `回覆`, `幫`, and
+`確認` as possible action items. It should not say "no tasks" when those words
+appear in captured LINE messages.
