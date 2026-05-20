@@ -40,12 +40,12 @@ acts for Alex in approved spaces, with clear target allowlists and logs.
 
 | Capability | Status | Notes |
 |---|---|---|
-| LINE group monitoring | design | groups must be added/approved by Alex |
-| Daily group report | design | one report per group plus master summary |
-| `alex-mind` vault updates | design | append-only notes first, structured memory later |
+| LINE group monitoring | scaffold | personal LINE Computer Use is the V1 route |
+| Daily group report | scaffold | JSONL event captures can generate Markdown reports |
+| `alex-mind` vault updates | scaffold | raw captures, reports, digests, and send audits |
 | Google Calendar awareness | design | needs connector/auth before live use |
-| Reply drafting | design | Alex voice guide required |
-| Reply sending | design | confirmation-gated except allowlisted commands |
+| Reply drafting | scaffold | policy-gated CLI draft command exists |
+| Reply sending | scaffold | personal LINE send-plan command exists, UI execution next |
 | Personal diary | design | daily private note for Alex |
 
 ## Repo Structure
@@ -73,6 +73,7 @@ memory there, following the vault's existing append-first rules.
 
 - [Three-cycle plan](docs/PLANNING_CYCLES.md)
 - [V1 implementation plan](docs/V1_IMPLEMENTATION_PLAN.md)
+- [Runtime CLI](docs/RUNTIME_CLI.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [LINE workflows](docs/LINE_WORKFLOWS.md)
 - [Calendar workflows](docs/CALENDAR_WORKFLOWS.md)
@@ -89,9 +90,17 @@ memory there, following the vault's existing append-first rules.
 
 ## Next Build Milestones
 
-1. Define group allowlist and LINE access model.
-2. Create Alex voice and reply policy.
-3. Add vault writer for daily notes.
-4. Add calendar reader with Google Calendar connector.
-5. Add LINE executor path for approved groups.
-6. Add daily scheduled reports.
+1. Create real local `config/groups.json` with approved personal LINE groups.
+2. Connect Computer Use to execute `PersonalLineSendPlan` safely.
+3. Add calendar reader with Google Calendar connector.
+4. Improve Alex voice drafting with examples from `alex-mind`.
+5. Add daily scheduled reports.
+6. Add eval fixtures from real approved group captures.
+
+## Run V1 Locally
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli status
+PYTHONPATH=src python3 -m alex_clone.cli daily-report tests/fixtures/line_events.jsonl --date 2026-05-20
+PYTHONPATH=src python3 -m unittest discover -s tests -v
+```

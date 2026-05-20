@@ -1,0 +1,10 @@
+[project]
+name = "alex-clone-project"
+version = "0.1.0"
+description = "Personal LINE based Alex Clone assistant scaffold"
+requires-python = ">=3.11"
+readme = "README.md"
+license = { file = "LICENSE" }
+
+[project.scripts]
+alex-clone = "alex_clone.cli:main"

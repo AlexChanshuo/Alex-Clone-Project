@@ -21,7 +21,7 @@ Expected result:
 
 ## Phase 0: Project Setup
 
-Status: started.
+Status: scaffolded.
 
 Tasks:
 
@@ -32,6 +32,8 @@ Tasks:
 - Add source links and research decisions to docs.
 
 ## Phase 1: LINE Read Pipeline
+
+Status: scaffolded for manual JSONL captures and personal LINE send plans.
 
 Build one ingestion abstraction with three adapters. V1 uses Alex's personal
 LINE session on this Mac as the primary route.
@@ -61,6 +63,8 @@ Normalized event shape:
 
 ## Phase 2: alex-mind Vault Writer
 
+Status: scaffolded.
+
 The writer should follow the existing `alex-mind` rules from `CLAUDE.md`:
 
 - raw source first,
@@ -83,6 +87,8 @@ Do not create a second vault. Do not write clone memory into BNI Masta unless
 Alex explicitly asks for a one-off export.
 
 ## Phase 3: Daily Report Engine
+
+Status: scaffolded.
 
 Cadence:
 
@@ -120,6 +126,8 @@ Clone: creates event and logs outcome.
 ```
 
 ## Phase 5: Reply Drafting And Sending
+
+Status: drafting and send-plan scaffolded; live UI execution is next.
 
 Every candidate reply should carry:
 
