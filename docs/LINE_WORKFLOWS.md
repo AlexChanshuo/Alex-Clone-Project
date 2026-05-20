@@ -12,6 +12,23 @@
 4. Clone starts recording summaries and open loops.
 5. Any outgoing message follows the group policy gate.
 
+## Follow-Up Tags
+
+Each watched LINE group can carry one or more follow-up tags so the clone knows
+which mental lane to use when reporting, prioritizing, and writing vault notes.
+
+Initial tags:
+
+| Tag | Meaning |
+|---|---|
+| `BNI` | BNI chapter, referrals, PALMS, meeting, leadership, member follow-up |
+| `AI` | AI community, tools, AI news, agent projects, learning material |
+| `family` | Family logistics and personal care context |
+| `Friends` | Friends, social plans, casual follow-up |
+
+The real watchlist is stored locally in `config/groups.json` and ignored by
+Git. The public `config/groups.example.json` only shows the schema.
+
 ## Access Model
 
 V1 primary route is Computer Use with Alex's personal LINE session already

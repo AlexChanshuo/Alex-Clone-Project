@@ -48,6 +48,18 @@ acts for Alex in approved spaces, with clear target allowlists and logs.
 | Reply sending | scaffold | personal LINE send-plan command exists, UI execution next |
 | Personal diary | design | daily private note for Alex |
 
+## Follow-Up Group Tags
+
+The clone supports follow-up tags for watched LINE groups:
+
+- `BNI`
+- `AI`
+- `family`
+- `Friends`
+
+The real approved watchlist lives locally in `config/groups.json` and is ignored
+by Git. Current local V1 watchlist has one BNI group and one AI group.
+
 ## Repo Structure
 
 ```text

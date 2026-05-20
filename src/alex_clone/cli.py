@@ -32,6 +32,10 @@ def build_parser() -> argparse.ArgumentParser:
     status = subparsers.add_parser("status", help="Show loaded config and vault status.")
     status.set_defaults(func=cmd_status)
 
+    groups = subparsers.add_parser("groups", help="List approved/follow-up LINE groups.")
+    groups.add_argument("--tag", help="Filter by tag, e.g. BNI, AI, family, Friends.")
+    groups.set_defaults(func=cmd_groups)
+
     ingest = subparsers.add_parser("ingest-manual", help="Append JSONL LINE events to alex-mind raw inbox.")
     ingest.add_argument("events_jsonl", type=Path)
     ingest.set_defaults(func=cmd_ingest_manual)
@@ -71,6 +75,28 @@ def cmd_status(args: argparse.Namespace, config) -> int:
             "allow_auto_send_for": sorted(config.policy.allow_auto_send_for),
         },
     }
+    print(json.dumps(payload, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_groups(args: argparse.Namespace, config) -> int:
+    groups = config.groups
+    if args.tag:
+        wanted = args.tag.casefold()
+        groups = [group for group in groups if any(tag.casefold() == wanted for tag in group.tags)]
+    payload = [
+        {
+            "display_name": group.display_name,
+            "slug": group.slug,
+            "tags": group.tags,
+            "aliases": group.aliases,
+            "status": group.status,
+            "mode": group.mode,
+            "daily_report": group.daily_report,
+            "ingestion_adapter": group.ingestion_adapter,
+        }
+        for group in groups
+    ]
     print(json.dumps(payload, ensure_ascii=False, indent=2))
     return 0
 
@@ -167,11 +193,12 @@ def cmd_personal_line_send_plan(args: argparse.Namespace, config) -> int:
 def find_group(name: str, groups: list[GroupConfig]) -> GroupConfig | None:
     normalized = name.casefold()
     for group in groups:
-        if normalized in {group.display_name.casefold(), group.slug.casefold()}:
+        candidates = {group.display_name.casefold(), group.slug.casefold()}
+        candidates.update(alias.casefold() for alias in group.aliases)
+        if normalized in candidates:
             return group
     return None
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

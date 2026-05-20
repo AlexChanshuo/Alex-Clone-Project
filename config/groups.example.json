@@ -3,6 +3,8 @@
     {
       "display_name": "AI實戰先鋒會 AI Agent group",
       "slug": "ai-agent-group",
+      "tags": ["AI"],
+      "aliases": ["AI實戰先鋒會"],
       "line_group_id": "",
       "status": "pending_approval",
       "mode": "observe_and_report",
@@ -11,6 +13,20 @@
       "ingestion_adapter": "line_personal_computer_use",
       "requires_active_group_title_check": true,
       "notes": "Example only. Do not store secrets here."
+    },
+    {
+      "display_name": "BNI華AI名人堂分會",
+      "slug": "bni-ai-hall-of-fame",
+      "tags": ["BNI"],
+      "aliases": ["BNI華AI名人堂分會 (43)"],
+      "line_group_id": "",
+      "status": "pending_approval",
+      "mode": "observe_and_report",
+      "allow_auto_send": false,
+      "daily_report": true,
+      "ingestion_adapter": "line_personal_computer_use",
+      "requires_active_group_title_check": true,
+      "notes": "Example only. Put real approved groups in untracked config/groups.json."
     }
   ]
 }

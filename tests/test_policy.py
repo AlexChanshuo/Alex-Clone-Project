@@ -29,6 +29,8 @@ def approved_group():
     return GroupConfig(
         display_name="AI",
         slug="ai",
+        tags=["AI"],
+        aliases=[],
         line_group_id="",
         status="approved",
         mode="draft_replies",
@@ -40,4 +42,3 @@ def approved_group():
 
 if __name__ == "__main__":
     unittest.main()
-

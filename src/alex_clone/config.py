@@ -16,6 +16,8 @@ DEFAULT_VAULT_DIR = Path("/Users/alex/Documents/Alex-Clone/Alex-Mind")
 class GroupConfig:
     display_name: str
     slug: str
+    tags: list[str]
+    aliases: list[str]
     line_group_id: str
     status: str
     mode: str
@@ -54,6 +56,8 @@ def load_groups(path: Path) -> list[GroupConfig]:
             GroupConfig(
                 display_name=item["display_name"],
                 slug=item.get("slug") or slugify(item["display_name"]),
+                tags=normalize_tags(item.get("tags", [])),
+                aliases=normalize_tags(item.get("aliases", [])),
                 line_group_id=item.get("line_group_id", ""),
                 status=item.get("status", "pending_approval"),
                 mode=item.get("mode", "observe_and_report"),
@@ -91,7 +95,10 @@ def load_policy(path: Path) -> PolicyConfig:
 def load_config(repo_root: Path | None = None) -> AppConfig:
     root = repo_root or Path.cwd()
     vault_dir = Path(os.environ.get("ALEX_MIND_VAULT_DIR", DEFAULT_VAULT_DIR)).expanduser()
-    groups_path = Path(os.environ.get("ALEX_CLONE_GROUPS_CONFIG", root / "config/groups.example.json"))
+    default_groups_path = root / "config/groups.json"
+    if not default_groups_path.exists():
+        default_groups_path = root / "config/groups.example.json"
+    groups_path = Path(os.environ.get("ALEX_CLONE_GROUPS_CONFIG", default_groups_path))
     policy_path = Path(os.environ.get("ALEX_CLONE_POLICY_CONFIG", root / "config/policy.example.json"))
     return AppConfig(
         repo_root=root,
@@ -106,3 +113,11 @@ def slugify(value: str) -> str:
     parts = [part for part in normalized.split("-") if part]
     return "-".join(parts) or "unknown"
 
+
+def normalize_tags(tags: list[str]) -> list[str]:
+    normalized = []
+    for tag in tags:
+        cleaned = str(tag).strip()
+        if cleaned and cleaned not in normalized:
+            normalized.append(cleaned)
+    return normalized

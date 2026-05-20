@@ -12,6 +12,16 @@ PYTHONPATH=src python3 -m alex_clone.cli status
 
 ## Commands
 
+### `groups`
+
+Lists the local approved/follow-up group watchlist. Filter by tag when needed.
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli groups
+PYTHONPATH=src python3 -m alex_clone.cli groups --tag BNI
+PYTHONPATH=src python3 -m alex_clone.cli groups --tag AI
+```
+
 ### `status`
 
 Shows loaded repo path, `alex-mind` path, group config, and policy config.
