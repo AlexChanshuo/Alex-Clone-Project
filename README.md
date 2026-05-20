@@ -43,6 +43,7 @@ acts for Alex in approved spaces, with clear target allowlists and logs.
 | LINE group monitoring | scaffold | personal LINE Computer Use is the V1 route |
 | Daily group report | scaffold | JSONL event captures can generate Markdown reports |
 | `alex-mind` vault updates | scaffold | raw captures, reports, digests, and send audits |
+| LINE fetch checkpoints | scaffold | local untracked checkpoint state prevents duplicate ingestion |
 | Google Calendar awareness | design | needs connector/auth before live use |
 | Reply drafting | scaffold | policy-gated CLI draft command exists |
 | Reply sending | scaffold | personal LINE send-plan command exists, UI execution next |
@@ -106,7 +107,7 @@ memory there, following the vault's existing append-first rules.
 ## Next Build Milestones
 
 1. Create real local `config/groups.json` with approved personal LINE groups.
-2. Connect Computer Use to execute `PersonalLineSendPlan` safely.
+2. Connect Computer Use to execute `PersonalLineFetchPlan` safely.
 3. Add calendar reader with Google Calendar connector.
 4. Improve Alex voice drafting with examples from `alex-mind`.
 5. Add daily scheduled reports.

@@ -33,7 +33,8 @@ Tasks:
 
 ## Phase 1: LINE Read Pipeline
 
-Status: scaffolded for manual JSONL captures and personal LINE send plans.
+Status: scaffolded for manual JSONL captures, personal LINE fetch plans,
+checkpoints, and personal LINE send plans.
 
 Build one ingestion abstraction with three adapters. V1 uses Alex's personal
 LINE session on this Mac as the primary route.
@@ -85,6 +86,14 @@ wiki/outputs/triage-queue.md
 
 Do not create a second vault. Do not write clone memory into BNI Masta unless
 Alex explicitly asks for a one-off export.
+
+Checkpoint state is stored outside Git at:
+
+```text
+.alex-clone-state/line-checkpoints.json
+```
+
+This is operational state, not memory. It should not be committed.
 
 ## Phase 3: Daily Report Engine
 

@@ -37,6 +37,7 @@ class PolicyConfig:
 class AppConfig:
     repo_root: Path
     vault_dir: Path
+    state_dir: Path
     groups: list[GroupConfig]
     policy: PolicyConfig
     telegram_bot_configured: bool
@@ -98,6 +99,7 @@ def load_config(repo_root: Path | None = None) -> AppConfig:
     root = repo_root or Path.cwd()
     env_values = load_env_file(root / ".env")
     vault_dir = Path(os.environ.get("ALEX_MIND_VAULT_DIR", DEFAULT_VAULT_DIR)).expanduser()
+    state_dir = Path(os.environ.get("ALEX_CLONE_STATE_DIR", root / ".alex-clone-state")).expanduser()
     default_groups_path = root / "config/groups.json"
     if not default_groups_path.exists():
         default_groups_path = root / "config/groups.example.json"
@@ -106,6 +108,7 @@ def load_config(repo_root: Path | None = None) -> AppConfig:
     return AppConfig(
         repo_root=root,
         vault_dir=vault_dir,
+        state_dir=state_dir,
         groups=load_groups(groups_path),
         policy=load_policy(policy_path),
         telegram_bot_configured=bool(

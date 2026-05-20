@@ -25,6 +25,7 @@ Main modules:
 - `commands.py`: parses Telegram-style natural language.
 - `config.py`: loads `.env`, group config, policy config, and vault path.
 - `line_personal.py`: creates safe LINE Computer Use send plans.
+- `checkpoint.py`: stores LINE fetch checkpoints in local untracked state.
 - `report.py`: creates daily reports from normalized LINE events.
 - `vault.py`: writes raw captures, reports, digests, and audits to `alex-mind`.
 - `policy.py`: decides draft-only, ask-confirm, auto-send, or blocked.
@@ -65,6 +66,8 @@ Run from repo root:
 PYTHONPATH=src python3 -m alex_clone.cli status
 PYTHONPATH=src python3 -m alex_clone.cli groups
 PYTHONPATH=src python3 -m alex_clone.cli interpret-command "分身，去看 AI 群今天有什麼重要的"
+PYTHONPATH=src python3 -m alex_clone.cli fetch-plan --tag AI
+PYTHONPATH=src python3 -m alex_clone.cli checkpoints
 PYTHONPATH=src python3 -m alex_clone.cli guide
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
@@ -78,10 +81,11 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 5. Executor verifies the active group title before reading or sending.
 6. Captured LINE messages become normalized `LineEvent` records.
 7. `VaultWriter` saves raw events to `alex-mind/raw/inbox/line/`.
-8. Report generator creates daily summaries.
-9. Reply drafts pass through the policy gate.
-10. Sends require confirmation unless group policy explicitly allows auto-send.
-11. Send audit is written to `alex-mind/logs/line-send-audit/`.
+8. `CheckpointStore` updates `.alex-clone-state/line-checkpoints.json`.
+9. Report generator creates daily summaries.
+10. Reply drafts pass through the policy gate.
+11. Sends require confirmation unless group policy explicitly allows auto-send.
+12. Send audit is written to `alex-mind/logs/line-send-audit/`.
 
 ### Next Build Step
 
@@ -98,6 +102,9 @@ Build the Computer Use LINE fetcher:
 - return summary to Telegram.
 
 Do not build auto-send before read/fetch/checkpoint is stable.
+
+Current next-phase status: fetch plans and checkpoints are implemented, but the
+actual UI reader is still next.
 
 ## 中文
 
@@ -121,6 +128,7 @@ Do not build auto-send before read/fetch/checkpoint is stable.
 - `commands.py`：解析 Telegram 自然語言指令。
 - `config.py`：讀 `.env`、群組 config、policy config、vault 路徑。
 - `line_personal.py`：建立安全的 LINE Computer Use 操作計畫。
+- `checkpoint.py`：把 LINE 擷取進度存在本機未追蹤 state。
 - `report.py`：把標準化 LINE events 變成每日報告。
 - `vault.py`：把 raw capture、report、digest、audit 寫進 `alex-mind`。
 - `policy.py`：判斷 draft-only、ask-confirm、auto-send、blocked。
@@ -160,6 +168,8 @@ bot token 只能留在本機，不要在 final response 裡印出完整 token。
 PYTHONPATH=src python3 -m alex_clone.cli status
 PYTHONPATH=src python3 -m alex_clone.cli groups
 PYTHONPATH=src python3 -m alex_clone.cli interpret-command "分身，去看 AI 群今天有什麼重要的"
+PYTHONPATH=src python3 -m alex_clone.cli fetch-plan --tag AI
+PYTHONPATH=src python3 -m alex_clone.cli checkpoints
 PYTHONPATH=src python3 -m alex_clone.cli guide
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
@@ -173,10 +183,11 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 5. executor 在讀取或送出前確認目前群組標題正確。
 6. 擷取到的 LINE 訊息轉成標準 `LineEvent`。
 7. `VaultWriter` 把 raw events 存到 `alex-mind/raw/inbox/line/`。
-8. report generator 產生每日摘要。
-9. reply draft 通過 policy gate。
-10. 除非群組 policy 明確允許 auto-send，否則送出前要 Alex 確認。
-11. send audit 寫到 `alex-mind/logs/line-send-audit/`。
+8. `CheckpointStore` 更新 `.alex-clone-state/line-checkpoints.json`。
+9. report generator 產生每日摘要。
+10. reply draft 通過 policy gate。
+11. 除非群組 policy 明確允許 auto-send，否則送出前要 Alex 確認。
+12. send audit 寫到 `alex-mind/logs/line-send-audit/`。
 
 ### 下一個開發步驟
 
@@ -194,3 +205,4 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 
 在 read/fetch/checkpoint 穩定之前，不要先做 auto-send。
 
+目前下一階段狀態：fetch plan 與 checkpoint 已完成，真正讀取 LINE UI 的 reader 還是下一步。

@@ -89,3 +89,44 @@ class SendAudit:
     confirmation_required: bool
     proof_path: str | None = None
 
+
+@dataclass(frozen=True)
+class FetchCheckpoint:
+    group_slug: str
+    last_event_fingerprint: str | None
+    last_seen_at: datetime | None
+    updated_at: datetime
+    source: str = "line_personal_computer_use"
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "FetchCheckpoint":
+        return cls(
+            group_slug=str(data["group_slug"]),
+            last_event_fingerprint=data.get("last_event_fingerprint"),
+            last_seen_at=parse_optional_datetime(data.get("last_seen_at")),
+            updated_at=parse_required_datetime(data.get("updated_at")),
+            source=str(data.get("source", "line_personal_computer_use")),
+        )
+
+    def to_json_dict(self) -> dict[str, Any]:
+        return {
+            "group_slug": self.group_slug,
+            "last_event_fingerprint": self.last_event_fingerprint,
+            "last_seen_at": self.last_seen_at.isoformat() if self.last_seen_at else None,
+            "updated_at": self.updated_at.isoformat(),
+            "source": self.source,
+        }
+
+
+def parse_optional_datetime(value: Any) -> datetime | None:
+    if value in {None, ""}:
+        return None
+    return parse_required_datetime(value)
+
+
+def parse_required_datetime(value: Any) -> datetime:
+    if isinstance(value, datetime):
+        return value
+    if isinstance(value, str):
+        return datetime.fromisoformat(value)
+    raise ValueError("datetime value is required")

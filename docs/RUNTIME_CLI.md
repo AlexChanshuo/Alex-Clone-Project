@@ -40,6 +40,27 @@ Shows command examples for Alex.
 PYTHONPATH=src python3 -m alex_clone.cli guide
 ```
 
+### `fetch-plan`
+
+Creates the exact plan the future Computer Use LINE fetcher must follow. This
+does not click LINE yet; it tells the executor which group to open, how many
+scrolls are allowed, where the checkpoint is, and what safety checks are
+required.
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli fetch-plan --tag AI
+PYTHONPATH=src python3 -m alex_clone.cli fetch-plan --tag BNI --max-scrolls 4 --capture-limit 40
+PYTHONPATH=src python3 -m alex_clone.cli fetch-plan --group "AI實戰先鋒會 AI Agent group"
+```
+
+### `checkpoints`
+
+Shows the last successfully ingested point for each approved LINE group.
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli checkpoints
+```
+
 ### `status`
 
 Shows loaded repo path, `alex-mind` path, group config, and policy config.
@@ -58,6 +79,7 @@ alex-mind/raw/inbox/line/YYYY-MM-DD/<group-slug>.jsonl
 
 ```bash
 PYTHONPATH=src python3 -m alex_clone.cli ingest-manual tests/fixtures/line_events.jsonl
+PYTHONPATH=src python3 -m alex_clone.cli ingest-manual tests/fixtures/line_events.jsonl --new-only --update-checkpoint
 ```
 
 ### `daily-report`

@@ -26,6 +26,8 @@ memory into the `alex-mind` Obsidian vault.
   `alex-mind`.
 - The clone has a policy gate that blocks or asks confirmation before risky
   sends.
+- The clone can create a fetch plan for each watched LINE group.
+- The clone has checkpoints so it can remember where it last stopped.
 
 ### What Is Not Ready Yet
 
@@ -35,7 +37,21 @@ memory into the `alex-mind` Obsidian vault.
 - It does not yet read Google Calendar live.
 
 The current system is the brain and command parser. The next work is the
-Computer Use "hands" that operate LINE safely.
+Computer Use "eyes and hands" that operate LINE safely.
+
+### What A Fetch Plan Means
+
+A fetch plan is a checklist for the future LINE reader. For example, for the AI
+group it says:
+
+1. Open Alex's personal LINE.
+2. Select the AI group.
+3. Confirm the group title is correct.
+4. Read visible messages.
+5. Scroll up only within the allowed limit.
+6. Stop when it reaches the last checkpoint.
+7. Save new messages to `alex-mind`.
+8. Update the checkpoint after a successful ingest.
 
 ### How Alex Will Use It
 
@@ -97,6 +113,8 @@ Alex Clone 是 Alex 的「分身助理」專案。它的用途是讓 Alex 在 Te
 - 分身可以把已擷取的 LINE 訊息整理成每日報告。
 - 分身可以把 raw capture、report、digest、send audit 寫進 `alex-mind`。
 - 分身有 policy gate，遇到風險訊息會阻擋或要求 Alex 確認。
+- 分身可以為每個 LINE 群產生 fetch plan。
+- 分身有 checkpoint，可以記得上次讀到哪裡。
 
 ### 還沒完成什麼
 
@@ -106,6 +124,20 @@ Alex Clone 是 Alex 的「分身助理」專案。它的用途是讓 Alex 在 Te
 - 還沒有接 Google Calendar。
 
 現在完成的是「大腦與指令理解」。下一步是做「手」：用 Computer Use 安全操作 LINE。
+更精準地說，下一步是做「眼睛與手」：讀取 LINE 畫面、擷取訊息、必要時送出。
+
+### Fetch Plan 是什麼
+
+fetch plan 是給未來 LINE reader 的檢查清單。例如 AI 群的 fetch plan 會說：
+
+1. 打開 Alex 本人的 LINE。
+2. 選擇 AI 群。
+3. 確認群組標題正確。
+4. 讀取目前可見訊息。
+5. 在允許範圍內往上捲。
+6. 看到上次 checkpoint 就停止。
+7. 把新訊息存到 `alex-mind`。
+8. 成功 ingest 後更新 checkpoint。
 
 ### Alex 會怎麼使用
 
@@ -143,4 +175,3 @@ Alex 傳訊息給 Telegram bot：
 ### 安全規則
 
 因為 V1 使用的是 Alex 本人的 LINE 身份，所以送訊息預設要很小心。分身必須先確認目前 LINE 群組標題正確，並且在送出前詢問 Alex，除非 Alex 已經明確允許某類低風險訊息可以自動送出。
-
