@@ -33,6 +33,7 @@ hermes/alexma-clone/skills/*/
 !hermes/alexma-clone/skills/alex-clone-line/
 !hermes/alexma-clone/skills/alex-clone-line/**
 hermes/alexma-clone/skills/alex-clone-line/references/session-*.md
+hermes/alexma-clone/skills/alex-clone-line/references/preview-ocr-script.py
 hermes/alexma-clone/memory.db*
 hermes/alexma-clone/state.db*
 *.log

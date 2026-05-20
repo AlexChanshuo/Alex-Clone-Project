@@ -40,7 +40,7 @@ acts for Alex in approved spaces, with clear target allowlists and logs.
 
 | Capability | Status | Notes |
 |---|---|---|
-| Telegram LLM brain | live | Hermes is installed, paired to Alex's Telegram, running through `launchd`, and using Copilot `gpt-5-mini` locally |
+| Telegram LLM brain | live/manual | Hermes is installed, paired to Alex's Telegram, running manually, and using Copilot `gpt-5-mini` locally |
 | LINE group monitoring | scaffold | personal LINE Computer Use is the V1 route |
 | Daily group report | scaffold | JSONL event captures can generate Markdown reports |
 | `alex-mind` vault updates | scaffold | raw captures, reports, digests, and send audits |
@@ -110,7 +110,7 @@ memory there, following the vault's existing append-first rules.
 ## Next Build Milestones
 
 1. Confirm the live Hermes Telegram bot responds consistently from Alex's phone.
-2. Verify the `launchd` gateway survives restart/sleep and logs cleanly.
+2. Install the Hermes gateway as a persistent Mac service and verify it survives restart/sleep.
 3. Connect Computer Use to produce LINE capture JSON from `PersonalLineFetchPlan`.
 4. Add scheduled morning, midday, and night reports after LINE capture is stable.
 5. Add calendar reader with Google Calendar connector.

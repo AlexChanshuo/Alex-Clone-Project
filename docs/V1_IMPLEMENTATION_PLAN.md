@@ -184,8 +184,9 @@ pre-send or post-send screenshot when practical, and write an audit record.
 
 ## Phase 6: Automation
 
-Status: planned. Hermes gateway is live through `launchd`, but scheduled LINE
-reports should wait until the LINE reader is stable.
+Status: planned. Hermes gateway is live manually, but scheduled LINE reports
+should wait until the LINE reader is stable and the gateway is installed as a
+persistent service.
 
 Create recurring jobs only after Phase 1-5 work manually:
 

@@ -4,7 +4,7 @@ description: >
   Operate Alex Clone's LINE group intelligence backend: parse Telegram commands,
   plan personal LINE fetches, normalize capture JSON, ingest captures into
   alex-mind, check checkpoints, list groups, and guide Alex in Traditional Chinese.
-version: 1.2.0
+version: 1.3.0
 metadata:
   hermes:
     tags: [alex-clone, line, telegram, obsidian, alex-mind]
@@ -33,6 +33,9 @@ deterministic execution layer.
 
 Do not directly write vault files from the LLM. Prefer CLI commands that
 validate, write, checkpoint, and report.
+
+Do not edit this skill or its reference files during normal Telegram operation.
+Runtime notes belong in ignored session files or the `alex-mind` vault.
 
 ## Repo Root
 
@@ -85,22 +88,34 @@ PYTHONPATH=src python3 -m alex_clone.cli normalize-capture tests/fixtures/line_c
 - Before opening or operating Alex's LINE UI, show the target group title and
   ask Alex for confirmation if there is any ambiguity.
 - Verify the active LINE group title before reading or sending.
+- Use screenshots or OCR only as aids; do not rely on them alone for safety
+  checks.
 - Do not send LINE messages from Hermes directly until the Computer Use executor
   is implemented and title-checked.
 - Stop and report if a permission, payment, login, 2FA, or system dialog appears.
 - Respect `capture_limit` and `max_scrolls`; do not endlessly scroll.
+- If `validate_group_title()` raises a title mismatch, halt the
+  ingest pipeline and require a fresh capture or explicit human confirmation
+  that the captured screenshot belongs to the intended group.
 
 ## Ingest Success Proof
 
-Do not claim LINE ingest is complete unless the CLI result shows:
+Do not claim LINE ingest is complete unless the CLI result shows all of the
+following as explicit evidence:
 
-- normalized events were accepted,
-- `paths` includes written vault/report files,
-- `updated_checkpoints` includes the affected group when checkpointing was requested,
+- `events_ingested` is > 0 when new events were expected, or the CLI JSON
+  explicitly explains why zero events were ingested (e.g. checkpoint covered them).
+- `paths` includes one or more written vault/raw event files.
+- `updated_checkpoints` includes the affected group when checkpointing was requested.
 - the group title matched the approved group or alias.
 
-If `--new-only` returns zero new events, explain that the checkpoint may already
-cover those messages and run `checkpoints` before retrying.
+If `--new-only` returns zero new events, do this before retrying:
+1. Run `PYTHONPATH=src python3 -m alex_clone.cli checkpoints`.
+2. If those messages are not newer, skip or ask before re-ingesting older messages.
+3. Re-run without `--new-only` only after human approval.
+
+If the CLI returns `report_markdown` but no `paths` or checkpoint updates, treat
+it as a partial operation and ask before claiming completion.
 
 ## Reply/Sending Safety
 

@@ -53,6 +53,6 @@ PYTHONPATH=src python3 -m alex_clone.cli personal-line-send-plan --group "AI實�
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
 export HERMES_HOME="/Users/alex/Documents/New project/Alex-Clone-Project/hermes/alexma-clone"
-hermes status
+hermes gateway status
 hermes -z "用繁體中文回答，只回答：Alex Clone Hermes 可以思考了。"
 ```

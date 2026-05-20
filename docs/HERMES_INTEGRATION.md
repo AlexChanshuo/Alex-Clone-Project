@@ -68,8 +68,8 @@ As of 2026-05-21:
 - `HERMES_HOME` is `/Users/alex/Documents/New project/Alex-Clone-Project/hermes/alexma-clone`.
 - `config.yaml` is present locally and uses Copilot `gpt-5-mini` as the model.
 - Telegram pairing has been approved for Alex's Telegram account.
-- The gateway has been tested and `hermes status` reports it running through
-  `launchd`.
+- The gateway has been tested manually. `hermes gateway status` reports it is
+  running manually, not yet as a persistent service.
 - The LINE Computer Use reader is still the next build phase; Hermes can plan
   and guide the operation, but it does not yet complete daily LINE reports
   end-to-end by itself.
@@ -126,7 +126,7 @@ hermes gateway start
 hermes gateway status
 ```
 
-If the service needs to be reinstalled or restarted:
+Recommended immediate sequence after manual Telegram testing:
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
@@ -175,8 +175,8 @@ Build the Computer Use LINE fetcher:
 6. Write raw events and daily reports to `alex-mind`.
 7. Return a concise Telegram summary through Hermes.
 
-Before scheduling daily reports, verify the gateway remains healthy after Mac
-sleep/restart:
+Before scheduling daily reports, install the gateway as a service and verify it
+remains healthy after Mac sleep/restart:
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"

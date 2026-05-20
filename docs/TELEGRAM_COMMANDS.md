@@ -9,8 +9,8 @@ LLM-backed conversation layer; Alex Clone's Python CLI remains the deterministic
 execution layer.
 
 Current status: Hermes is installed and paired for Alex's Telegram account. The
-gateway has been tested and `hermes status` reports it running through
-`launchd`.
+gateway has been tested manually; persistent service setup is the next runtime
+step.
 
 Bot URL:
 
