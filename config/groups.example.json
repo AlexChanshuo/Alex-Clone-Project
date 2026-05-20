@@ -1,0 +1,13 @@
+{
+  "groups": [
+    {
+      "display_name": "AI實戰先鋒會 AI Agent group",
+      "status": "pending_approval",
+      "mode": "observe_and_report",
+      "allow_auto_send": false,
+      "daily_report": true,
+      "notes": "Example only. Do not store secrets here."
+    }
+  ]
+}
+

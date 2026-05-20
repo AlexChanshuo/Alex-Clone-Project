@@ -1,0 +1,17 @@
+{
+  "default_group_policy": "observe_and_report",
+  "require_confirmation_for": [
+    "new_group",
+    "calendar_create_or_edit",
+    "sensitive_data",
+    "money_or_contract",
+    "emotional_or_ambiguous_reply",
+    "cross_group_forwarding"
+  ],
+  "allow_auto_send_for": [
+    "acknowledgement",
+    "received_will_review",
+    "low_risk_logistics"
+  ]
+}
+
