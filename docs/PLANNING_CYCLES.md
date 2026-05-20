@@ -11,8 +11,11 @@ Calendar context, and help draft or send replies under clear rules.
 
 Official LINE constraints shape the first implementation:
 
+- Alex has decided V1 will use the personal LINE session already logged in on
+  this Mac as the primary operating path.
 - A LINE Official Account can be invited into group chats if `Allow bot to join
-  group chats` is enabled in the LINE Developers Console.
+  group chats` is enabled in the LINE Developers Console. This remains an
+  optional later adapter, not the V1 default.
 - Only one LINE Official Account can be in a group or multi-person chat at a
   time.
 - Webhook message events from groups include a `source.groupId`; that group ID
@@ -107,8 +110,8 @@ Alex Clone needs more than one LINE path because LINE access varies by group:
 
 | Path | Use Case | Strength | Limitation |
 |---|---|---|---|
-| LINE Official Account webhook | Groups where the clone OA can be invited | Clean IDs, reliable webhooks, API sending | Only one OA per group; must be invited |
-| Computer Use / Alex LINE desktop | Groups where OA cannot join or Alex wants account-context operation | Works with existing logged-in LINE UI | Needs Mac permissions, screenshots, fragile UI |
+| Computer Use / Alex personal LINE desktop | V1 primary path for groups in Alex's LINE on this Mac | Works with Alex's actual group membership and identity | Needs Mac permissions, screenshots, fragile UI, higher send risk |
+| LINE Official Account webhook | Later optional path for groups where a clone OA can be invited | Clean IDs, reliable webhooks, API sending | Only one OA per group; must be invited |
 | Manual/export fallback | Historical context or one-off group data | Low risk, easy import | Not real-time |
 
 ### Data Flow
@@ -193,8 +196,8 @@ Outgoing LINE actions pass through a policy gate:
 
 - `alex-mind` is the canonical memory vault.
 - V1 is append-first; no destructive vault edits.
-- LINE OA webhook is preferred when available.
-- Computer Use is a fallback for UI-only or already-logged-in contexts.
+- Personal LINE through Computer Use is the V1 primary operating path.
+- LINE OA webhook is a later optional adapter when a group can add a clone OA.
 - Calendar read is allowed earlier than calendar write.
 - Calendar write and high-risk LINE send require explicit confirmation.
 - Every send and vault write needs an audit trail.

@@ -36,8 +36,8 @@ flowchart TD
 
 | Adapter | When To Use |
 |---|---|
-| LINE Official Account webhook | Preferred path when the clone OA can be added to the group |
-| Computer Use over LINE desktop/web | Fallback for groups that must use Alex's logged-in LINE UI |
+| Computer Use over Alex's personal LINE desktop/web | V1 primary path using Alex's logged-in LINE on this Mac |
+| LINE Official Account webhook | Optional later path when a separate clone OA can be added to the group |
 | Manual import | Historical catch-up or one-off exports |
 
 ## Storage Model

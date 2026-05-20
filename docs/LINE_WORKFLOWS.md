@@ -14,17 +14,28 @@
 
 ## Access Model
 
-Preferred route is the LINE Messaging API with a clone LINE Official Account:
+V1 primary route is Computer Use with Alex's personal LINE session already
+logged in on this Mac. The clone operates the same LINE identity Alex uses, so
+it must be more careful than a separate bot account:
+
+- open the LINE desktop/web UI already authenticated on this PC,
+- search/select only an approved group,
+- verify the active group title before reading or sending,
+- use clipboard paste for composed messages,
+- ask Alex before sending anything outside allowlisted low-risk patterns,
+- take screenshots when stuck and for important send proof,
+- write an audit record for every outbound message.
+
+Optional later route is the LINE Messaging API with a clone LINE Official
+Account:
 
 - enable `Allow bot to join group chats`,
 - invite the clone OA into an approved group,
 - store `source.groupId` from webhook events as the stable group key,
 - use push messages to send to that group only when policy allows.
 
-Fallback route is Computer Use with Alex's LINE desktop/web session when the
-group cannot add the clone OA or when Alex intentionally wants his logged-in UI
-used. Fallback automation must take screenshots when stuck and preserve a send
-audit because UI state can drift.
+API mode is useful only when Alex wants a separate clone account and a group can
+accept that account.
 
 Official references:
 
@@ -57,6 +68,6 @@ Each group report should include:
 Use clipboard paste for multi-line messages. Do not type multi-line content
 character-by-character because LINE for Mac treats Return as send.
 
-When sending via API, group push messages use the group ID as the `to` target.
 When sending via Computer Use, the executor must verify the active group name
-before pasting or sending.
+before pasting or sending. When sending via API, group push messages use the
+group ID as the `to` target.

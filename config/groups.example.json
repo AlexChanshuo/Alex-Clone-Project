@@ -8,7 +8,8 @@
       "mode": "observe_and_report",
       "allow_auto_send": false,
       "daily_report": true,
-      "ingestion_adapter": "line_webhook",
+      "ingestion_adapter": "line_personal_computer_use",
+      "requires_active_group_title_check": true,
       "notes": "Example only. Do not store secrets here."
     }
   ]

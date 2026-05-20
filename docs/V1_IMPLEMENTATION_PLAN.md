@@ -33,20 +33,21 @@ Tasks:
 
 ## Phase 1: LINE Read Pipeline
 
-Build one ingestion abstraction with three adapters:
+Build one ingestion abstraction with three adapters. V1 uses Alex's personal
+LINE session on this Mac as the primary route.
 
 | Adapter | Priority | Notes |
 |---|---:|---|
-| `line_webhook` | 1 | Best path when the clone OA is invited to a group |
-| `line_desktop_computer_use` | 2 | Uses Alex's logged-in LINE desktop/web UI when needed |
+| `line_personal_computer_use` | 1 | Uses Alex's logged-in LINE desktop/web UI on this Mac |
+| `line_webhook` | 2 | Optional later path when a clone OA is invited to a group |
 | `manual_import` | 3 | Paste/export/import historical messages |
 
 Normalized event shape:
 
 ```json
 {
-  "source": "line_webhook",
-  "group_id": "line-group-id-or-local-alias",
+  "source": "line_personal_computer_use",
+  "group_id": "local-line-group-alias-or-detected-name",
   "group_name": "AI實戰先鋒會 AI Agent group",
   "message_id": "provider-message-id",
   "sender_id": "line-user-or-observed-name",
@@ -139,6 +140,10 @@ Default actions:
 | "以後這種可以直接回" | Add only if group policy allows low-risk auto-send |
 | "幫我安排/答應..." | Check calendar and ask confirmation |
 
+Because V1 uses Alex's personal LINE identity, the executor must verify the
+active group title before any send, paste the prepared message, take a
+pre-send or post-send screenshot when practical, and write an audit record.
+
 ## Phase 6: Automation
 
 Create recurring jobs only after Phase 1-5 work manually:
@@ -166,7 +171,7 @@ Before calling V1 live:
 ## Open Questions
 
 - Which LINE groups can invite the clone Official Account?
-- Which groups must use Alex's existing LINE UI through Computer Use?
+- Which personal LINE groups should be approved for V1 monitoring?
 - Should morning and night reports go to LINE, Telegram, or a private note first?
 - What reply categories should be auto-send eligible after V1?
 - Should the clone identify itself in each group, or only in test messages?
