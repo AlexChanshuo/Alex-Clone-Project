@@ -28,3 +28,6 @@ def write_events_jsonl(path: Path, events: list[LineEvent]) -> None:
         for event in events:
             file.write(json.dumps(event.to_json_dict(), ensure_ascii=False) + "\n")
 
+
+def events_to_jsonl(events: list[LineEvent]) -> str:
+    return "".join(json.dumps(event.to_json_dict(), ensure_ascii=False) + "\n" for event in events)

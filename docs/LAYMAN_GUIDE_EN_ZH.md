@@ -28,6 +28,8 @@ memory into the `alex-mind` Obsidian vault.
   sends.
 - The clone can create a fetch plan for each watched LINE group.
 - The clone has checkpoints so it can remember where it last stopped.
+- The clone can now accept a LINE screen capture JSON file and ingest it.
+- The clone can turn a Telegram command into a concrete command plan.
 
 ### What Is Not Ready Yet
 
@@ -38,6 +40,10 @@ memory into the `alex-mind` Obsidian vault.
 
 The current system is the brain and command parser. The next work is the
 Computer Use "eyes and hands" that operate LINE safely.
+
+The bridge is now ready: once Computer Use can read the LINE screen, it only
+needs to produce capture JSON. Alex Clone can already validate, ingest,
+checkpoint, and report from that capture.
 
 ### What A Fetch Plan Means
 
@@ -115,6 +121,8 @@ Alex Clone 是 Alex 的「分身助理」專案。它的用途是讓 Alex 在 Te
 - 分身有 policy gate，遇到風險訊息會阻擋或要求 Alex 確認。
 - 分身可以為每個 LINE 群產生 fetch plan。
 - 分身有 checkpoint，可以記得上次讀到哪裡。
+- 分身現在可以接收 LINE 畫面擷取 JSON 並 ingest。
+- 分身可以把 Telegram 指令轉成具體 command plan。
 
 ### 還沒完成什麼
 
@@ -125,6 +133,8 @@ Alex Clone 是 Alex 的「分身助理」專案。它的用途是讓 Alex 在 Te
 
 現在完成的是「大腦與指令理解」。下一步是做「手」：用 Computer Use 安全操作 LINE。
 更精準地說，下一步是做「眼睛與手」：讀取 LINE 畫面、擷取訊息、必要時送出。
+
+現在橋已經搭好：只要 Computer Use 能讀 LINE 畫面並產生 capture JSON，Alex Clone 已經可以驗證、ingest、更新 checkpoint、產生報告。
 
 ### Fetch Plan 是什麼
 

@@ -1,0 +1,16 @@
+{
+  "source": "line_personal_computer_use",
+  "group_title": "AI實戰先鋒會",
+  "captured_at": "2026-05-20T22:10:00+08:00",
+  "messages": [
+    {
+      "sender": "Kevin",
+      "sent_at": "2026-05-20T22:01:00+08:00",
+      "text": "請問 Alex 可以幫我看一下 AI agent demo 嗎？"
+    },
+    {
+      "sender": "AlexMa",
+      "text": "我晚點整理資料"
+    }
+  ]
+}

@@ -33,8 +33,9 @@ Tasks:
 
 ## Phase 1: LINE Read Pipeline
 
-Status: scaffolded for manual JSONL captures, personal LINE fetch plans,
-checkpoints, and personal LINE send plans.
+Status: scaffolded for manual JSONL captures, LINE screen capture JSON,
+personal LINE fetch plans, command plans, checkpoints, and personal LINE send
+plans.
 
 Build one ingestion abstraction with three adapters. V1 uses Alex's personal
 LINE session on this Mac as the primary route.
@@ -44,6 +45,24 @@ LINE session on this Mac as the primary route.
 | `line_personal_computer_use` | 1 | Uses Alex's logged-in LINE desktop/web UI on this Mac |
 | `line_webhook` | 2 | Optional later path when a clone OA is invited to a group |
 | `manual_import` | 3 | Paste/export/import historical messages |
+
+Capture JSON is now the contract between Computer Use and the ingest pipeline.
+The UI reader should output:
+
+```json
+{
+  "source": "line_personal_computer_use",
+  "group_title": "AI實戰先鋒會",
+  "captured_at": "2026-05-20T22:10:00+08:00",
+  "messages": [
+    {
+      "sender": "Kevin",
+      "sent_at": "2026-05-20T22:01:00+08:00",
+      "text": "message body"
+    }
+  ]
+}
+```
 
 Normalized event shape:
 

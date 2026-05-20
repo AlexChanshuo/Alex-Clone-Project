@@ -25,6 +25,7 @@ Main modules:
 - `commands.py`: parses Telegram-style natural language.
 - `config.py`: loads `.env`, group config, policy config, and vault path.
 - `line_personal.py`: creates safe LINE Computer Use send plans.
+- `line_capture.py`: normalizes LINE screen capture JSON into `LineEvent`.
 - `checkpoint.py`: stores LINE fetch checkpoints in local untracked state.
 - `report.py`: creates daily reports from normalized LINE events.
 - `vault.py`: writes raw captures, reports, digests, and audits to `alex-mind`.
@@ -66,8 +67,10 @@ Run from repo root:
 PYTHONPATH=src python3 -m alex_clone.cli status
 PYTHONPATH=src python3 -m alex_clone.cli groups
 PYTHONPATH=src python3 -m alex_clone.cli interpret-command "分身，去看 AI 群今天有什麼重要的"
+PYTHONPATH=src python3 -m alex_clone.cli command-plan "分身，去看 AI 群今天有什麼重要的"
 PYTHONPATH=src python3 -m alex_clone.cli fetch-plan --tag AI
 PYTHONPATH=src python3 -m alex_clone.cli checkpoints
+PYTHONPATH=src python3 -m alex_clone.cli normalize-capture tests/fixtures/line_capture_ai.json --group "AI實戰先鋒會"
 PYTHONPATH=src python3 -m alex_clone.cli guide
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
@@ -103,8 +106,9 @@ Build the Computer Use LINE fetcher:
 
 Do not build auto-send before read/fetch/checkpoint is stable.
 
-Current next-phase status: fetch plans and checkpoints are implemented, but the
-actual UI reader is still next.
+Current next-phase status: fetch plans, checkpoints, command plans, and capture
+ingest are implemented. The actual UI reader that produces capture JSON is
+still next.
 
 ## 中文
 
@@ -128,6 +132,7 @@ actual UI reader is still next.
 - `commands.py`：解析 Telegram 自然語言指令。
 - `config.py`：讀 `.env`、群組 config、policy config、vault 路徑。
 - `line_personal.py`：建立安全的 LINE Computer Use 操作計畫。
+- `line_capture.py`：把 LINE 畫面擷取 JSON 轉成 `LineEvent`。
 - `checkpoint.py`：把 LINE 擷取進度存在本機未追蹤 state。
 - `report.py`：把標準化 LINE events 變成每日報告。
 - `vault.py`：把 raw capture、report、digest、audit 寫進 `alex-mind`。
@@ -168,8 +173,10 @@ bot token 只能留在本機，不要在 final response 裡印出完整 token。
 PYTHONPATH=src python3 -m alex_clone.cli status
 PYTHONPATH=src python3 -m alex_clone.cli groups
 PYTHONPATH=src python3 -m alex_clone.cli interpret-command "分身，去看 AI 群今天有什麼重要的"
+PYTHONPATH=src python3 -m alex_clone.cli command-plan "分身，去看 AI 群今天有什麼重要的"
 PYTHONPATH=src python3 -m alex_clone.cli fetch-plan --tag AI
 PYTHONPATH=src python3 -m alex_clone.cli checkpoints
+PYTHONPATH=src python3 -m alex_clone.cli normalize-capture tests/fixtures/line_capture_ai.json --group "AI實戰先鋒會"
 PYTHONPATH=src python3 -m alex_clone.cli guide
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
@@ -205,4 +212,4 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 
 在 read/fetch/checkpoint 穩定之前，不要先做 auto-send。
 
-目前下一階段狀態：fetch plan 與 checkpoint 已完成，真正讀取 LINE UI 的 reader 還是下一步。
+目前下一階段狀態：fetch plan、checkpoint、command plan、capture ingest 已完成。真正讀取 LINE UI 並產生 capture JSON 的 reader 還是下一步。

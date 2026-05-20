@@ -32,6 +32,16 @@ PYTHONPATH=src python3 -m alex_clone.cli interpret-command "分身，去看 AI �
 PYTHONPATH=src python3 -m alex_clone.cli interpret-command "整理 BNI 今天重點並更新 alex-mind"
 ```
 
+### `command-plan`
+
+Turns a Telegram-style natural-language command into target groups, fetch
+plans, and the next runtime step.
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli command-plan "分身，去看 AI 群今天有什麼重要的"
+PYTHONPATH=src python3 -m alex_clone.cli command-plan "整理 BNI 今天重點並更新 alex-mind"
+```
+
 ### `guide`
 
 Shows command examples for Alex.
@@ -80,6 +90,60 @@ alex-mind/raw/inbox/line/YYYY-MM-DD/<group-slug>.jsonl
 ```bash
 PYTHONPATH=src python3 -m alex_clone.cli ingest-manual tests/fixtures/line_events.jsonl
 PYTHONPATH=src python3 -m alex_clone.cli ingest-manual tests/fixtures/line_events.jsonl --new-only --update-checkpoint
+```
+
+### `normalize-capture`
+
+Converts a LINE screen capture JSON file into normalized `LineEvent` JSONL.
+This is the contract for the future Computer Use reader.
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli normalize-capture \
+  tests/fixtures/line_capture_ai.json \
+  --group "AI實戰先鋒會"
+```
+
+Capture JSON shape:
+
+```json
+{
+  "source": "line_personal_computer_use",
+  "group_title": "AI實戰先鋒會",
+  "captured_at": "2026-05-20T22:10:00+08:00",
+  "messages": [
+    {
+      "sender": "Kevin",
+      "sent_at": "2026-05-20T22:01:00+08:00",
+      "text": "請問 Alex 可以幫我看一下 AI agent demo 嗎？"
+    }
+  ]
+}
+```
+
+### `ingest-capture`
+
+Normalizes a capture, writes raw events to `alex-mind`, updates the checkpoint,
+and can produce a report.
+
+```bash
+PYTHONPATH=src python3 -m alex_clone.cli ingest-capture \
+  tests/fixtures/line_capture_ai.json \
+  --group "AI實戰先鋒會" \
+  --new-only \
+  --update-checkpoint \
+  --report
+```
+
+For tests, redirect both vault and state:
+
+```bash
+ALEX_MIND_VAULT_DIR=/tmp/alex-clone-vault-test \
+ALEX_CLONE_STATE_DIR=/tmp/alex-clone-state-test \
+PYTHONPATH=src python3 -m alex_clone.cli ingest-capture \
+  tests/fixtures/line_capture_ai.json \
+  --group "AI實戰先鋒會" \
+  --new-only \
+  --update-checkpoint
 ```
 
 ### `daily-report`
