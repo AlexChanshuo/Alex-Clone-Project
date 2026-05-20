@@ -4,6 +4,10 @@ Alex Clone is controlled from Telegram through `@AlexmaClone_bot`. Telegram is
 the command surface; Alex's personal LINE on this Mac is the workspace the clone
 operates.
 
+The recommended live Telegram runtime is Hermes Agent. Hermes provides the
+LLM-backed conversation layer; Alex Clone's Python CLI remains the deterministic
+execution layer.
+
 Bot URL:
 
 <https://t.me/AlexmaClone_bot>

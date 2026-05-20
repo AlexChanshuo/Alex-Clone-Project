@@ -91,6 +91,7 @@ memory there, following the vault's existing append-first rules.
 - [V1 implementation plan](docs/V1_IMPLEMENTATION_PLAN.md)
 - [Runtime CLI](docs/RUNTIME_CLI.md)
 - [Telegram commands](docs/TELEGRAM_COMMANDS.md)
+- [Hermes integration](docs/HERMES_INTEGRATION.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [LINE workflows](docs/LINE_WORKFLOWS.md)
 - [Calendar workflows](docs/CALENDAR_WORKFLOWS.md)

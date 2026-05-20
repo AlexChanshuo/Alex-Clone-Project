@@ -8,6 +8,11 @@ __pycache__/
 secrets/
 config/groups.json
 .alex-clone-state/
+hermes/alexma-clone/.env
+hermes/alexma-clone/sessions/
+hermes/alexma-clone/logs/
+hermes/alexma-clone/cache/
+hermes/alexma-clone/memory.db*
 *.log
 tmp/
 dist/

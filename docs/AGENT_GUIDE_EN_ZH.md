@@ -11,6 +11,7 @@ This guide is for Codex or any future agent working on Alex Clone Project.
 - GitHub: `https://github.com/AlexChanshuo/Alex-Clone-Project`
 - Canonical memory vault: `/Users/alex/Documents/Alex-Clone/Alex-Mind`
 - Telegram command bot: `@AlexmaClone_bot`
+- Hermes home: `/Users/alex/Documents/New project/Alex-Clone-Project/hermes/alexma-clone`
 - LINE route: Alex's personal LINE on this Mac via Computer Use
 
 This project is separate from BNI Masta. Do not mix BNI Masta implementation or
@@ -19,6 +20,8 @@ docs into this repo unless Alex explicitly asks.
 ### Current Runtime
 
 The code is dependency-free Python under `src/alex_clone`.
+Hermes is the recommended LLM-backed Telegram brain. It should call the Python
+CLI through the `alex-clone-line` skill instead of reimplementing execution.
 
 Main modules:
 
@@ -75,6 +78,8 @@ PYTHONPATH=src python3 -m alex_clone.cli guide
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
+Hermes setup docs live in `docs/HERMES_INTEGRATION.md`.
+
 ### Intended Live Flow
 
 1. Alex sends a Telegram command.
@@ -119,6 +124,7 @@ still next.
 - GitHub：`https://github.com/AlexChanshuo/Alex-Clone-Project`
 - 主要記憶 vault：`/Users/alex/Documents/Alex-Clone/Alex-Mind`
 - Telegram 指令 bot：`@AlexmaClone_bot`
+- Hermes home：`/Users/alex/Documents/New project/Alex-Clone-Project/hermes/alexma-clone`
 - LINE 操作方式：用 Computer Use 操作這台 Mac 上 Alex 本人的 LINE
 
 這個專案跟 BNI Masta 是分開的。除非 Alex 明確要求，不要把 BNI Masta 的實作或文件混進這個 repo。
@@ -126,6 +132,8 @@ still next.
 ### 目前 runtime
 
 程式碼是無外部依賴的 Python，位置在 `src/alex_clone`。
+Hermes 是建議使用的 Telegram LLM 大腦。它應該透過
+`alex-clone-line` skill 呼叫 Python CLI，不要重新實作執行層。
 
 主要模組：
 
@@ -180,6 +188,8 @@ PYTHONPATH=src python3 -m alex_clone.cli normalize-capture tests/fixtures/line_c
 PYTHONPATH=src python3 -m alex_clone.cli guide
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
+
+Hermes 設定文件在 `docs/HERMES_INTEGRATION.md`。
 
 ### 預期正式流程
 

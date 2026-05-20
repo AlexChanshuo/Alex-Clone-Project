@@ -30,6 +30,7 @@ memory into the `alex-mind` Obsidian vault.
 - The clone has checkpoints so it can remember where it last stopped.
 - The clone can now accept a LINE screen capture JSON file and ingest it.
 - The clone can turn a Telegram command into a concrete command plan.
+- A Hermes agent home now exists for the LLM-backed Telegram brain.
 
 ### What Is Not Ready Yet
 
@@ -44,6 +45,9 @@ Computer Use "eyes and hands" that operate LINE safely.
 The bridge is now ready: once Computer Use can read the LINE screen, it only
 needs to produce capture JSON. Alex Clone can already validate, ingest,
 checkpoint, and report from that capture.
+
+Hermes will be the natural conversation layer. It lets Alex talk normally in
+Telegram, while the backend CLI keeps file writes and execution deterministic.
 
 ### What A Fetch Plan Means
 
@@ -123,6 +127,7 @@ Alex Clone 是 Alex 的「分身助理」專案。它的用途是讓 Alex 在 Te
 - 分身有 checkpoint，可以記得上次讀到哪裡。
 - 分身現在可以接收 LINE 畫面擷取 JSON 並 ingest。
 - 分身可以把 Telegram 指令轉成具體 command plan。
+- Hermes agent home 已建立，用來當 Telegram 的 LLM 大腦。
 
 ### 還沒完成什麼
 
@@ -135,6 +140,8 @@ Alex Clone 是 Alex 的「分身助理」專案。它的用途是讓 Alex 在 Te
 更精準地說，下一步是做「眼睛與手」：讀取 LINE 畫面、擷取訊息、必要時送出。
 
 現在橋已經搭好：只要 Computer Use 能讀 LINE 畫面並產生 capture JSON，Alex Clone 已經可以驗證、ingest、更新 checkpoint、產生報告。
+
+Hermes 會是自然對話層。Alex 可以在 Telegram 用一般語氣說話，後端 CLI 則負責 deterministic 的檔案寫入與執行。
 
 ### Fetch Plan 是什麼
 
