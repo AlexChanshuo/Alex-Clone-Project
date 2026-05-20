@@ -32,6 +32,14 @@ flowchart TD
 | LINE executor | Send via approved LINE route and write delivery audit |
 | Scheduler | Run morning/midday/night routines |
 
+## Ingestion Adapters
+
+| Adapter | When To Use |
+|---|---|
+| LINE Official Account webhook | Preferred path when the clone OA can be added to the group |
+| Computer Use over LINE desktop/web | Fallback for groups that must use Alex's logged-in LINE UI |
+| Manual import | Historical catch-up or one-off exports |
+
 ## Storage Model
 
 Vault-first, append-only in V1. The canonical LLM wiki vault is named

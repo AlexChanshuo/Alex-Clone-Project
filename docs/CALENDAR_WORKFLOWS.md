@@ -10,6 +10,20 @@ After Alex connects Google Calendar, the clone should:
 - suggest reply wording when schedule affects availability,
 - ask before creating or editing events.
 
+## API Shape
+
+Use a read-first model:
+
+- `events.list` for upcoming events,
+- `freeBusy.query` for availability checks,
+- `events.insert` only after explicit confirmation.
+
+Official references:
+
+- <https://developers.google.com/workspace/calendar/api/v3/reference/events/list>
+- <https://developers.google.com/workspace/calendar/api/v3/reference/freebusy/query>
+- <https://developers.google.com/workspace/calendar/api/v3/reference/events/insert>
+
 ## Examples
 
 | Situation | Behavior |
@@ -18,4 +32,3 @@ After Alex connects Google Calendar, the clone should:
 | Group announces event | Add to "possible events" list, ask before calendar write |
 | Alex says `幫我排進去` | Prepare event details, ask before final create |
 | Tomorrow is crowded | Morning report warns Alex and suggests response triage |
-

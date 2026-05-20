@@ -31,9 +31,9 @@ acts for Alex in approved spaces, with clear target allowlists and logs.
 
 | Time | Routine | Output |
 |---|---|---|
-| 08:30 | Morning scan | overnight group changes, calendar conflicts, priority replies |
+| 09:00 | Morning scan | overnight group changes, calendar conflicts, priority replies |
 | 12:30 | Midday pulse | urgent group requests, unanswered mentions, schedule nudges |
-| 20:30 | Daily report | per-group summary, relationship updates, diary note |
+| 20:00 | Daily report | per-group summary, relationship updates, diary note |
 | On command | Reply/send | draft first by default, auto-send only for allowlisted low-risk patterns |
 
 ## Initial Capabilities
@@ -56,6 +56,28 @@ src/               Future runtime code
 config/            Non-secret config templates
 vault-templates/   Markdown templates for the alex-mind Obsidian vault
 ```
+
+## Canonical Memory Vault
+
+The LLM wiki vault for this project is:
+
+```text
+/Users/alex/Documents/Alex-Clone/Alex-Mind
+```
+
+In docs and config this is referred to as `alex-mind`. The clone should write
+raw LINE captures, daily summaries, relationship notes, diary entries, and task
+memory there, following the vault's existing append-first rules.
+
+## Planning Docs
+
+- [Three-cycle plan](docs/PLANNING_CYCLES.md)
+- [V1 implementation plan](docs/V1_IMPLEMENTATION_PLAN.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [LINE workflows](docs/LINE_WORKFLOWS.md)
+- [Calendar workflows](docs/CALENDAR_WORKFLOWS.md)
+- [Vault schema](docs/VAULT_SCHEMA.md)
+- [Operating policy](docs/OPERATING_POLICY.md)
 
 ## Safety Rules
 

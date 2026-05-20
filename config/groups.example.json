@@ -2,12 +2,14 @@
   "groups": [
     {
       "display_name": "AI實戰先鋒會 AI Agent group",
+      "slug": "ai-agent-group",
+      "line_group_id": "",
       "status": "pending_approval",
       "mode": "observe_and_report",
       "allow_auto_send": false,
       "daily_report": true,
+      "ingestion_adapter": "line_webhook",
       "notes": "Example only. Do not store secrets here."
     }
   ]
 }
-
